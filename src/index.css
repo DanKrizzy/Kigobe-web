@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Church Brand Colors */
+    --background: 0 0% 99%;
+    --foreground: 220 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 12%;
+
+    /* Orange - warmth, joy */
+    --primary: 28 95% 54%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 32 100% 70%;
+    --primary-dark: 22 90% 40%;
+
+    /* Blue - trust, faith */
+    --secondary: 215 65% 35%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 210 60% 50%;
+    --secondary-dark: 220 70% 25%;
+
+    /* Neutral */
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 42 90% 52%;
+    --accent-foreground: 220 25% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 92%;
+    --ring: 28 95% 54%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 70% 25% / 0.85), hsl(22 90% 35% / 0.75));
+    --gradient-primary: linear-gradient(135deg, hsl(28 95% 54%), hsl(42 90% 52%));
+    --gradient-secondary: linear-gradient(135deg, hsl(215 65% 35%), hsl(210 60% 50%));
+    --gradient-warm: linear-gradient(180deg, hsl(32 100% 98%), hsl(0 0% 100%));
+    --gradient-cool: linear-gradient(180deg, hsl(215 60% 96%), hsl(0 0% 100%));
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px -8px hsl(220 25% 12% / 0.12);
+    --shadow-primary: 0 8px 32px -8px hsl(28 95% 54% / 0.35);
+    --shadow-secondary: 0 8px 32px -8px hsl(215 65% 35% / 0.30);
+    --shadow-hover: 0 16px 48px -12px hsl(28 95% 54% / 0.25);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Church Brand Colors - Dark Mode */
+    --background: 220 25% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Orange - warmth, joy */
+    --primary: 28 95% 54%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 32 100% 70%;
+    --primary-dark: 22 90% 40%;
+
+    /* Blue - trust, faith */
+    --secondary: 215 65% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 210 60% 60%;
+    --secondary-dark: 220 70% 35%;
+
+    /* Neutral */
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 42 90% 52%;
+    --accent-foreground: 220 25% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 28 95% 54%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 70% 25% / 0.95), hsl(22 90% 35% / 0.85));
+    --gradient-primary: linear-gradient(135deg, hsl(28 95% 54%), hsl(42 90% 52%));
+    --gradient-secondary: linear-gradient(135deg, hsl(215 65% 45%), hsl(210 60% 60%));
+    --gradient-warm: linear-gradient(180deg, hsl(220 25% 10%), hsl(220 25% 8%));
+    --gradient-cool: linear-gradient(180deg, hsl(220 25% 12%), hsl(220 25% 10%));
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px -8px hsl(0 0% 0% / 0.4);
+    --shadow-primary: 0 8px 32px -8px hsl(28 95% 54% / 0.35);
+    --shadow-secondary: 0 8px 32px -8px hsl(215 65% 45% / 0.30);
+    --shadow-hover: 0 16px 48px -12px hsl(28 95% 54% / 0.25);
+
+    /* Sidebar */
+    --sidebar-background: 220 25% 10%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 220 25% 8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  .gradient-cool {
+    background: var(--gradient-cool);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-primary {
+    box-shadow: var(--shadow-primary);
+  }
+
+  .shadow-secondary {
+    box-shadow: var(--shadow-secondary);
+  }
+
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-secondary {
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 px-4 md:px-8;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Intersection Observer animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 3px;
+}
