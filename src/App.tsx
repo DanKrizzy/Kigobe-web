@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Index from "./pages/Index";
 import Donation from "./pages/Donation";
 import NotFound from "./pages/NotFound";
@@ -24,6 +25,9 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <div className="fixed right-4 bottom-4 z-50 rounded-full bg-background/90 p-1 shadow-xl border border-border backdrop-blur-xl">
+          <ThemeToggle />
+        </div>
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>

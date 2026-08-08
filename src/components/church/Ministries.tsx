@@ -39,7 +39,7 @@ export default function Ministries() {
         <div className="grid md:grid-cols-3 gap-6 mb-6">
           {ministries.slice(0, 3).map((ministry, i) => (
             <div
-              key={ministry.name}
+              key={ministry.nameKey}
               className={`reveal reveal-delay-${i + 1} rounded-2xl overflow-hidden shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 group cursor-pointer`}
             >
               {ministry.image && (
@@ -73,7 +73,7 @@ export default function Ministries() {
         <div className="grid md:grid-cols-3 gap-6">
           {ministries.slice(3).map((ministry, i) => (
             <div
-              key={ministry.name}
+              key={ministry.nameKey}
               className={`reveal reveal-delay-${i + 1} bg-card rounded-2xl p-6 shadow-card border border-border hover:shadow-hover hover:-translate-y-1 transition-all duration-300`}
             >
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4">
