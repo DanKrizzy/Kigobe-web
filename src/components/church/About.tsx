@@ -92,11 +92,12 @@ export default function About() {
         <div className="reveal text-center bg-card rounded-3xl p-8 md:p-12 shadow-card border border-border">
           <span className="inline-block text-primary font-body font-semibold text-sm tracking-widest uppercase mb-3">{t("about.leadership")}</span>
           <h3 className="font-display text-3xl font-bold text-secondary mb-8">{t("about.guidedBy")}</h3>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: "Pasteur Jean-Pierre Ndayishimiye", role: t("about.seniorPastor"), initials: "JP" },
-              { name: "Pasteure Marie-Claire Hakizimana", role: t("about.associatePastor"), initials: "MC" },
-              { name: "Diacre Emmanuel Niyonzima", role: t("about.headOfOutreach"), initials: "EN" },
+              { name: "Pasteur Aime Prosper", role: t("about.seniorPastor"), initials: "AP" },
+              { name: "Pasteur Anaclet", role: t("about.associatePastor"), initials: "AA" },
+              { name: "Pasteur Pie", role: t("about.associatePastor"), initials: "PP" },
+              { name: "Diacre Eloge", role: t("about.deacon"), initials: "EL" },
             ].map((leader) => (
               <div key={leader.name} className="flex flex-col items-center gap-3">
                 <div className="w-16 h-16 rounded-full gradient-secondary flex items-center justify-center text-white font-display font-bold text-xl shadow-secondary">

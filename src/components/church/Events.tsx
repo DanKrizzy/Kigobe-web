@@ -92,7 +92,7 @@ export default function Events() {
                     {t("events.subscribe")}
                   </a>
                   <a
-                    href="https://wa.me/25761234567"
+                    href="https://wa.me/25764433144"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 text-center py-2.5 rounded-full bg-green-500 text-white text-sm font-semibold hover:bg-green-600 transition-all"

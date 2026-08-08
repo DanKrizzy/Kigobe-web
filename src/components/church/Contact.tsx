@@ -106,7 +106,7 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/25761234567?text=Bonjour%20Minevam%20Kigobe%20Church!"
+              href="https://wa.me/25764433144?text=Bonjour%20Minevam%20Kigobe%20Church!"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-xl border transition-colors group"
@@ -117,7 +117,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="font-semibold font-body" style={{ color: "hsl(141 60% 25%)" }}>Chat on WhatsApp</p>
-                <p className="text-sm font-body" style={{ color: "hsl(141 55% 35%)" }}>+257 61 234 567 — Usually responds in minutes</p>
+                <p className="text-sm font-body" style={{ color: "hsl(141 55% 35%)" }}>+257 644 331 44 — Usually responds in minutes</p>
               </div>
             </a>
 
