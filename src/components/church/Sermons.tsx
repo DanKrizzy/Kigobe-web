@@ -3,13 +3,14 @@ import { Play, Youtube, ExternalLink } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useTranslation } from "react-i18next";
 
+const youtubeChannelUrl = "https://www.youtube.com/@minevamkigobe";
+
 const sermons = [
   {
     title: "La Foi qui Déplace les Montagnes",
     pastor: "Pasteur Jean-Pierre Ndayishimiye",
     date: "16 Février 2025",
     series: "Série: La Puissance de la Foi",
-    youtubeId: "dQw4w9WgXcQ", // Placeholder - replace with real ID
     thumbnail: sermonImage,
   },
   {
@@ -17,7 +18,6 @@ const sermons = [
     pastor: "Pasteure Marie-Claire Hakizimana",
     date: "9 Février 2025",
     series: "Série: Vivre en Victoire",
-    youtubeId: "dQw4w9WgXcQ",
     thumbnail: sermonImage,
   },
   {
@@ -25,7 +25,6 @@ const sermons = [
     pastor: "Pasteur Jean-Pierre Ndayishimiye",
     date: "2 Février 2025",
     series: "Série: La Puissance de la Foi",
-    youtubeId: "dQw4w9WgXcQ",
     thumbnail: sermonImage,
   },
 ];
@@ -62,7 +61,7 @@ export default function Sermons() {
               />
               <div className="absolute inset-0 bg-secondary-dark/40 group-hover:bg-secondary-dark/20 transition-colors flex items-center justify-center">
                 <a
-                  href="https://www.youtube.com/@MinevamKigobe"
+                  href={youtubeChannelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-16 h-16 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-card hover:scale-110 transition-all"
@@ -89,7 +88,7 @@ export default function Sermons() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://www.youtube.com/@MinevamKigobe"
+                  href={youtubeChannelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full gradient-primary text-primary-foreground font-semibold text-sm shadow-primary hover:shadow-hover hover:-translate-y-0.5 transition-all"
@@ -98,7 +97,7 @@ export default function Sermons() {
                   {t("sermons.watchNow")}
                 </a>
                 <a
-                  href="https://www.youtube.com/@MinevamKigobe"
+                  href={youtubeChannelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-foreground font-semibold text-sm hover:border-secondary hover:text-secondary transition-all"
@@ -126,7 +125,7 @@ export default function Sermons() {
                 />
                 <div className="absolute inset-0 bg-secondary-dark/30 group-hover:bg-secondary-dark/10 transition-colors flex items-center justify-center">
                   <a
-                    href="https://www.youtube.com/@MinevamKigobe"
+                    href={youtubeChannelUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-11 h-11 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-card"
@@ -148,7 +147,7 @@ export default function Sermons() {
         {/* YouTube CTA */}
         <div className="reveal mt-10 text-center">
           <a
-            href="https://www.youtube.com/@MinevamKigobe"
+            href={youtubeChannelUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-destructive text-destructive-foreground font-semibold hover:-translate-y-0.5 transition-all shadow-lg"
