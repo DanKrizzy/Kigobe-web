@@ -1,9 +1,11 @@
 import { Cross, Facebook, Instagram, Youtube, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useSiteSettings } from "@/hooks/useSiteContent";
 
 export default function Footer() {
   const { t } = useTranslation();
+  const settings = useSiteSettings();
 
   const quickLinks = [
     { label: t("nav.home"), to: "/#home" },
@@ -17,13 +19,13 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: Facebook, label: "Facebook", href: "https://facebook.com/MinevamKigobe", color: "hover:text-blue-500" },
-    { icon: Instagram, label: "Instagram", href: "https://instagram.com/MinevamKigobe", color: "hover:text-pink-500" },
-    { icon: Youtube, label: "YouTube", href: "https://youtube.com/@MinevamKigobe", color: "hover:text-red-500" },
+    { icon: Facebook, label: "Facebook", href: settings.facebook, color: "hover:text-blue-500" },
+    { icon: Instagram, label: "Instagram", href: settings.instagram, color: "hover:text-pink-500" },
+    { icon: Youtube, label: "YouTube", href: settings.youtube, color: "hover:text-red-500" },
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      href: "https://wa.me/25764433144",
+      href: `https://wa.me/${settings.whatsapp}`,
       color: "hover:text-green-400",
     },
   ];
@@ -56,9 +58,11 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className={`w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 ${social.color} hover:bg-white/20 transition-all`}
+                  className={`group w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 ${social.color} hover:bg-white/20 transition-all`}
                 >
-                  <social.icon className="w-4 h-4" />
+                  <social.icon
+                    className={`w-4 h-4 ${social.label === "WhatsApp" ? "whatsapp-glow" : ""}`}
+                  />
                 </a>
               ))}
             </div>
@@ -106,28 +110,28 @@ export default function Footer() {
           <div>
             <h4 className="font-display font-bold text-white mb-5">{t("footer.contactUs")}</h4>
             <ul className="space-y-3">
-              <li className="flex gap-3 text-sm text-white/70 font-body">
+              <li className="flex gap-3 text-sm text-white/70 font-body whitespace-pre-line">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                Quartier Kigobe, Bujumbura, Burundi
+                {settings.address}
               </li>
               <li className="flex gap-3 text-sm text-white/70 font-body">
                 <Phone className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                +257 64433144
+                {settings.phone1}
               </li>
               <li className="flex gap-3 text-sm text-white/70 font-body">
                 <Mail className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                info@minervamkigobe.bi
+                {settings.email1}
               </li>
             </ul>
 
             {/* WhatsApp Button */}
             <a
-              href="https://wa.me/25764433144?text=Bonjour%21"
+              href={`https://wa.me/${settings.whatsapp}?text=Bonjour%21`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-green-500 text-white text-sm font-semibold hover:bg-green-600 transition-all"
+              className="group mt-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-green-500 text-white text-sm font-semibold hover:bg-green-600 transition-all"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="w-4 h-4 whatsapp-glow" />
               {t("footer.chatWhatsApp")}
             </a>
           </div>
@@ -137,7 +141,7 @@ export default function Footer() {
       {/* Verse Banner */}
       <div className="border-t border-slate-800 py-5 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-white/50 text-sm font-body italic">"{t("footer.verse")}"</p>
+          <p className="text-white/50 text-sm font-body italic">{settings.footerVerse}</p>
         </div>
       </div>
 
@@ -147,8 +151,8 @@ export default function Footer() {
           <p className="text-white/50 text-sm font-body">© {new Date().getFullYear()} Minevam Kigobe. Tous droits réservés.</p>
           <div className="flex flex-wrap items-center gap-3 text-sm text-white/60 font-body">
             <span>Contactez-nous</span>
-            <a href="mailto:info@minervamkigobe.bi" className="hover:text-white transition-colors">info@minervamkigobe.bi</a>
-            <a href="https://wa.me/25764433144" className="hover:text-white transition-colors">WhatsApp</a>
+            <a href={`mailto:${settings.email1}`} className="hover:text-white transition-colors">{settings.email1}</a>
+            <a href={`https://wa.me/${settings.whatsapp}`} className="hover:text-white transition-colors">WhatsApp</a>
           </div>
         </div>
       </div>

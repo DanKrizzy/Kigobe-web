@@ -194,6 +194,16 @@
     box-shadow: var(--shadow-hover);
   }
 
+  .whatsapp-glow {
+    transition: filter 0.3s ease, color 0.3s ease;
+  }
+
+  .whatsapp-glow:hover,
+  .group:hover .whatsapp-glow {
+    color: #25d366;
+    animation: whatsappGlow 1.4s ease-in-out infinite;
+  }
+
   .text-gradient-primary {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -249,6 +259,16 @@
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+@keyframes whatsappGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 3px rgba(37, 211, 102, 0.75));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(37, 211, 102, 1))
+      drop-shadow(0 0 18px rgba(37, 211, 102, 0.55));
+  }
 }
 
 /* Intersection Observer animations */

@@ -1,11 +1,13 @@
-import communityImage from "@/assets/community.jpg";
 import { Heart, Eye, Users } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useTranslation } from "react-i18next";
+import { useSiteLeadership, useSiteSettings } from "@/hooks/useSiteContent";
 
 export default function About() {
   const { t } = useTranslation();
   const ref = useReveal();
+  const settings = useSiteSettings();
+  const leaders = useSiteLeadership();
 
   return (
     <section id="about" className="section-padding gradient-warm" ref={ref}>
@@ -25,7 +27,7 @@ export default function About() {
           <div className="reveal">
             <div className="relative">
               <img
-                src={communityImage}
+                src={settings.aboutImage}
                 alt="Minevam Kigobe Church community"
                 className="rounded-3xl shadow-card w-full h-80 md:h-96 object-cover"
               />
@@ -42,10 +44,10 @@ export default function About() {
           {/* Text */}
           <div className="reveal reveal-delay-1">
             <p className="text-muted-foreground text-lg leading-relaxed mb-6 font-body">
-              {t("about.paragraph1")}
+              {settings.aboutParagraph1}
             </p>
             <p className="text-muted-foreground leading-relaxed font-body">
-              {t("about.paragraph2")}
+              {settings.aboutParagraph2}
             </p>
           </div>
         </div>
@@ -58,21 +60,21 @@ export default function About() {
               title: t("about.mission"),
               color: "bg-primary/10 text-primary",
               border: "border-primary/20",
-              description: t("about.missionDesc"),
+              description: settings.mission,
             },
             {
               icon: Eye,
               title: t("about.vision"),
               color: "bg-secondary/10 text-secondary",
               border: "border-secondary/20",
-              description: t("about.visionDesc"),
+              description: settings.vision,
             },
             {
               icon: Users,
               title: t("about.values"),
               color: "bg-accent/20 text-accent-foreground",
               border: "border-accent/30",
-              description: t("about.valuesDesc"),
+              description: settings.values,
             },
           ].map((item, i) => (
             <div
@@ -89,28 +91,25 @@ export default function About() {
         </div>
 
         {/* Leadership */}
-        <div className="reveal text-center bg-card rounded-3xl p-8 md:p-12 shadow-card border border-border">
-          <span className="inline-block text-primary font-body font-semibold text-sm tracking-widest uppercase mb-3">{t("about.leadership")}</span>
-          <h3 className="font-display text-3xl font-bold text-secondary mb-8">{t("about.guidedBy")}</h3>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { name: "Pasteur Aime Prosper", role: t("about.seniorPastor"), initials: "AP" },
-              { name: "Pasteur Anaclet", role: t("about.associatePastor"), initials: "AA" },
-              { name: "Pasteur Pie", role: t("about.associatePastor"), initials: "PP" },
-              { name: "Diacre Eloge", role: t("about.deacon"), initials: "EL" },
-            ].map((leader) => (
-              <div key={leader.name} className="flex flex-col items-center gap-3">
-                <div className="w-16 h-16 rounded-full gradient-secondary flex items-center justify-center text-white font-display font-bold text-xl shadow-secondary">
-                  {leader.initials}
+        {leaders.length > 0 && (
+          <div className="reveal text-center bg-card rounded-3xl p-8 md:p-12 shadow-card border border-border">
+            <span className="inline-block text-primary font-body font-semibold text-sm tracking-widest uppercase mb-3">{t("about.leadership")}</span>
+            <h3 className="font-display text-3xl font-bold text-secondary mb-8">{t("about.guidedBy")}</h3>
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {leaders.map((leader) => (
+                <div key={leader.id} className="flex flex-col items-center gap-3">
+                  <div className="w-16 h-16 rounded-full gradient-secondary flex items-center justify-center text-white font-display font-bold text-xl shadow-secondary">
+                    {leader.initials}
+                  </div>
+                  <div>
+                    <p className="font-display font-semibold text-foreground">{leader.name}</p>
+                    <p className="text-primary text-sm font-body">{leader.role}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-display font-semibold text-foreground">{leader.name}</p>
-                  <p className="text-primary text-sm font-body">{leader.role}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

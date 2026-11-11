@@ -3,6 +3,7 @@ import { Heart, Send, CheckCircle } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
+import { STORAGE_KEYS, generateId, getPrayerRequests, writeStore } from "@/data/siteData";
 
 const prayerSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -42,6 +43,19 @@ export default function PrayerRequest() {
       return;
     }
     setErrors({});
+    const requests = getPrayerRequests();
+    writeStore(STORAGE_KEYS.prayerRequests, [
+      {
+        id: generateId("prayer"),
+        name: form.name.trim(),
+        email: form.email.trim(),
+        prayerType: form.prayerType,
+        request: form.request.trim(),
+        isPrivate: form.isPrivate,
+        createdAt: new Date().toISOString(),
+      },
+      ...requests,
+    ]);
     setSubmitted(true);
   };
 

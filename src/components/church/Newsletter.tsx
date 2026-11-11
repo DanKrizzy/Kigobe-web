@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Send, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
+import { STORAGE_KEYS, generateId, getSubscribers, writeStore } from "@/data/siteData";
 
 const newsletterSchema = z.object({
   email: z.string().trim().email("Please enter a valid email address"),
@@ -27,6 +28,14 @@ export default function Newsletter() {
       return;
     }
     setErrors({});
+    const subscribers = getSubscribers();
+    const email = form.email.trim().toLowerCase();
+    if (!subscribers.some((subscriber) => subscriber.email === email)) {
+      writeStore(STORAGE_KEYS.subscribers, [
+        { id: generateId("sub"), name: form.name.trim(), email, createdAt: new Date().toISOString() },
+        ...subscribers,
+      ]);
+    }
     setSubscribed(true);
   };
 

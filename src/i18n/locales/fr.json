@@ -83,7 +83,15 @@
     "latestMessage": "DERNIER MESSAGE",
     "watchNow": "Regarder maintenant",
     "youtubeChannel": "Chaîne YouTube",
-    "subscribe": "S'abonner sur YouTube"
+    "subscribe": "S'abonner sur YouTube",
+    "latestVideos": "Vidéos récentes",
+    "latestVideosSubtitle": "Les dernières vidéos de notre chaîne YouTube et de notre page Facebook.",
+    "fromYouTube": "YouTube",
+    "fromFacebook": "Facebook",
+    "watchOnFacebook": "Regarder sur Facebook",
+    "refreshVideos": "Actualiser les vidéos",
+    "loadingVideos": "Chargement des dernières vidéos…",
+    "noFeedVideos": "Aucune vidéo récupérée pour le moment."
   },
   "events": {
     "whatsHappening": "À l'affiche",

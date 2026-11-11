@@ -83,7 +83,15 @@
     "latestMessage": "UBUTUMWA BWA NYUMA",
     "watchNow": "Reba none",
     "youtubeChannel": "YouTube",
-    "subscribe": "Kwiyandikisha kuri YouTube"
+    "subscribe": "Kwiyandikisha kuri YouTube",
+    "latestVideos": "Videwo nshasha",
+    "latestVideosSubtitle": "Videwo nshasha ziva kuri YouTube no kuri Facebook.",
+    "fromYouTube": "YouTube",
+    "fromFacebook": "Facebook",
+    "watchOnFacebook": "Raba kuri Facebook",
+    "refreshVideos": "Kuvugurura videwo",
+    "loadingVideos": "Turiko turazana videwo nshasha…",
+    "noFeedVideos": "Nta videwo yashizweho ubu."
   },
   "events": {
     "whatsHappening": "Icyabaye",

@@ -1,16 +1,17 @@
-import heroImage from "@/assets/hero-church.jpg";
+import { useSiteSettings } from "@/hooks/useSiteContent";
 import { ChevronDown, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
   const { t } = useTranslation();
+  const settings = useSiteSettings();
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
+          src={settings.heroImage}
           alt="Minevam Kigobe Church worship service"
           className="w-full h-full object-cover"
         />
@@ -27,22 +28,22 @@ export default function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5 mb-6 animate-fade-in">
           <span className="w-2 h-2 rounded-full gradient-primary animate-pulse" />
-          <span className="text-white text-sm font-medium">{t("hero.badge")}</span>
+          <span className="text-white text-sm font-medium">{settings.heroBadge}</span>
         </div>
 
         {/* Church Name */}
         <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight animate-fade-up">
-          {t("hero.churchName")}
-          <span className="block text-accent"> {t("hero.churchNameAccent")}</span>
-          <span className="block text-4xl md:text-5xl lg:text-6xl font-semibold text-white/90">{t("hero.church")}</span>
+          {settings.churchName}
+          <span className="block text-accent"> {settings.churchNameAccent}</span>
+          <span className="block text-4xl md:text-5xl lg:text-6xl font-semibold text-white/90">{settings.church}</span>
         </h1>
 
         {/* Tagline */}
         <p className="text-white/85 text-lg md:text-2xl font-body max-w-2xl mx-auto mb-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
-          {t("hero.tagline")}
+          {settings.tagline}
         </p>
         <p className="text-white/65 text-sm md:text-base font-body mb-10 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-          {t("hero.location")}
+          {settings.location}
         </p>
 
         {/* CTA Buttons */}

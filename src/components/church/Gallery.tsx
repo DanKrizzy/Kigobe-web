@@ -1,23 +1,12 @@
-import heroImage from "@/assets/hero-church.jpg";
-import communityImage from "@/assets/community.jpg";
-import choirImage from "@/assets/choir.jpg";
-import youthImage from "@/assets/youth.jpg";
-import sermonImage from "@/assets/sermon.jpg";
 import { Camera } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useTranslation } from "react-i18next";
-
-const photos = [
-  { src: heroImage, alt: "Sunday Worship Service", caption: "Sunday Worship", span: "col-span-2 row-span-2" },
-  { src: choirImage, alt: "Church Choir", caption: "Chorale & Louange" },
-  { src: youthImage, alt: "Youth Ministry", caption: "Ministère des Jeunes" },
-  { src: communityImage, alt: "Community gathering", caption: "Fellowship Community" },
-  { src: sermonImage, alt: "Sermon preaching", caption: "The Word Preached" },
-];
+import { useSiteGallery } from "@/hooks/useSiteContent";
 
 export default function Gallery() {
   const { t } = useTranslation();
   const ref = useReveal();
+  const photos = useSiteGallery();
 
   return (
     <section id="gallery" className="section-padding gradient-cool" ref={ref}>
@@ -37,27 +26,31 @@ export default function Gallery() {
         </div>
 
         {/* Photo Grid */}
-        <div className="reveal grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4" style={{ gridTemplateRows: "auto" }}>
-          {photos.map((photo, i) => (
-            <div
-              key={photo.alt}
-              className={`relative rounded-2xl overflow-hidden group cursor-pointer ${
-                i === 0 ? "col-span-2 row-span-2" : ""
-              }`}
-              style={{ aspectRatio: i === 0 ? "auto" : "1 / 1", minHeight: i === 0 ? "360px" : "160px" }}
-            >
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <p className="text-white font-display font-semibold text-sm">{photo.caption}</p>
+        {photos.length === 0 ? (
+          <p className="text-center text-muted-foreground font-body">No photos uploaded yet.</p>
+        ) : (
+          <div className="reveal grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4" style={{ gridTemplateRows: "auto" }}>
+            {photos.map((photo, i) => (
+              <div
+                key={photo.id}
+                className={`relative rounded-2xl overflow-hidden group cursor-pointer ${
+                  i === 0 ? "col-span-2 row-span-2" : ""
+                }`}
+                style={{ aspectRatio: i === 0 ? "auto" : "1 / 1", minHeight: i === 0 ? "360px" : "160px" }}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  <p className="text-white font-display font-semibold text-sm">{photo.caption}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Instagram CTA */}
         <div className="reveal mt-8 text-center">

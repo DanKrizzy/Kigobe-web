@@ -3,6 +3,8 @@ import { MapPin, Phone, Mail, Clock, Send, CheckCircle, MessageCircle } from "lu
 import { useReveal } from "@/hooks/useReveal";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
+import { useSiteSettings } from "@/hooks/useSiteContent";
+import { STORAGE_KEYS, generateId, getMessages, writeStore } from "@/data/siteData";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -14,6 +16,7 @@ const contactSchema = z.object({
 export default function Contact() {
   const { t } = useTranslation();
   const ref = useReveal();
+  const settings = useSiteSettings();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Partial<typeof form>>({});
   const [sent, setSent] = useState(false);
@@ -31,6 +34,19 @@ export default function Contact() {
       return;
     }
     setErrors({});
+    const messages = getMessages();
+    writeStore(STORAGE_KEYS.messages, [
+      {
+        id: generateId("msg"),
+        name: form.name.trim(),
+        email: form.email.trim(),
+        subject: form.subject.trim(),
+        message: form.message.trim(),
+        read: false,
+        createdAt: new Date().toISOString(),
+      },
+      ...messages,
+    ]);
     setSent(true);
   };
 
@@ -66,28 +82,28 @@ export default function Contact() {
                 {
                   icon: MapPin,
                   label: "Address",
-                  value: "Quartier Kigobe, Avenue de la Mission\nBujumbura, Burundi",
+                  value: settings.address,
                   color: "text-primary",
                   bg: "bg-primary/10",
                 },
                 {
                   icon: Phone,
                   label: "Phone",
-                  value: "+257 61 234 567\n+257 79 345 678",
+                  value: `${settings.phone1}\n${settings.phone2}`,
                   color: "text-secondary",
                   bg: "bg-secondary/10",
                 },
                 {
                   icon: Mail,
                   label: "Email",
-                  value: "info@minervamkigobe.bi\npasteur@minervamkigobe.bi",
+                  value: `${settings.email1}\n${settings.email2}`,
                   color: "text-accent-foreground",
                   bg: "bg-accent/20",
                 },
                 {
                   icon: Clock,
                   label: "Office Hours",
-                  value: "Mon – Fri: 8:00 AM – 5:00 PM\nSaturday: 9:00 AM – 1:00 PM",
+                  value: settings.officeHours,
                   color: "text-primary",
                   bg: "bg-primary/10",
                 },
@@ -106,18 +122,18 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/25764433144?text=Bonjour%20Minevam%20Kigobe%20Church!"
+              href={`https://wa.me/${settings.whatsapp}?text=Bonjour%20Minevam%20Kigobe%20Church!`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-4 rounded-xl border transition-colors group"
               style={{ backgroundColor: "hsl(141 80% 96%)", borderColor: "hsl(141 70% 80%)" }}
             >
               <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: "hsl(141 70% 45%)" }}>
-                <MessageCircle className="w-5 h-5 text-primary-foreground" />
+                <MessageCircle className="w-5 h-5 text-primary-foreground whatsapp-glow" />
               </div>
               <div>
                 <p className="font-semibold font-body" style={{ color: "hsl(141 60% 25%)" }}>Chat on WhatsApp</p>
-                <p className="text-sm font-body" style={{ color: "hsl(141 55% 35%)" }}>+257 644 331 44 — Usually responds in minutes</p>
+                <p className="text-sm font-body" style={{ color: "hsl(141 55% 35%)" }}>+{settings.whatsapp} — Usually responds in minutes</p>
               </div>
             </a>
 
@@ -125,7 +141,7 @@ export default function Contact() {
             <div className="rounded-2xl overflow-hidden border border-border shadow-card h-56">
               <iframe
                 title="Minevam Kigobe Church Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63760.57!2d29.35!3d-3.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c183d8d5f6a6b5%3A0x0!2sBujumbura%2C+Burundi!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                src={settings.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

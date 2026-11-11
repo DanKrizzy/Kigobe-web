@@ -12,6 +12,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle2, Copy, Heart, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { MOBILE_MONEY_PROVIDERS, type MobileMoneyProvider } from "@/config/mobileMoney";
+import { useSiteDonation } from "@/hooks/useSiteContent";
+import { STORAGE_KEYS, generateId, getDonationRecords, writeStore } from "@/data/siteData";
 
 const donationSchema = z.object({
   type: z.enum(["tithe", "offering", "donation"]),
@@ -30,6 +32,7 @@ const quickAmounts = [5000, 10000, 25000, 50000, 100000];
 
 export default function Donation() {
   const { t } = useTranslation();
+  const donationSettings = useSiteDonation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedType, setSelectedType] = useState<"tithe" | "offering" | "donation">("donation");
   const [paymentMethod, setPaymentMethod] = useState<MobileMoneyProvider>("lumicash");
@@ -56,7 +59,10 @@ export default function Donation() {
   });
 
   const amount = watch("amount");
-  const provider = MOBILE_MONEY_PROVIDERS[paymentMethod];
+  const provider = {
+    ...MOBILE_MONEY_PROVIDERS[paymentMethod],
+    ...donationSettings[paymentMethod],
+  };
 
   const reference = useMemo(() => {
     if (savedReference) return savedReference;
@@ -72,10 +78,27 @@ export default function Donation() {
     }
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: DonationFormData) => {
     setIsSubmitting(true);
     try {
       setSavedReference(reference);
+      const records = getDonationRecords();
+      writeStore(STORAGE_KEYS.donations, [
+        {
+          id: generateId("don"),
+          reference,
+          name: data.name.trim(),
+          email: data.email.trim(),
+          phone: data.phone?.trim() ?? "",
+          type: data.type,
+          amount: Number(data.amount) || 0,
+          provider: data.paymentMethod,
+          transactionId: data.transactionId?.trim() ?? "",
+          message: data.message?.trim() ?? "",
+          createdAt: new Date().toISOString(),
+        },
+        ...records,
+      ]);
       toast.success(t("donation.instructionsReady"));
     } catch (error) {
       toast.error(t("donation.error"));
